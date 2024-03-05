@@ -5,7 +5,6 @@ namespace Polntantos\AnnotationPlugin;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Facades\FilamentAsset;
 use Livewire\Livewire;
-use Polntantos\AnnotationPlugin\AnnotationPlugin;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -26,7 +25,7 @@ class AnnotationPluginServiceProvider extends PackageServiceProvider
 
         FilamentAsset::register(
             assets: [
-                AlpineComponent::make('annotation-plugin', __DIR__ . '/../resources/dist/annotation-plugin.js'),
+                AlpineComponent::make('annotation-plugin', __DIR__.'/../resources/dist/annotation-plugin.js'),
             ],
             package: 'polntantos/annotation-plugin'
         );

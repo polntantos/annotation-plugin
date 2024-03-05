@@ -34,8 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Polntantos\\AnnotationPlugin\\": "src/",
-            "Polntantos\\AnnotationPlugin\\Database\\Factories\\": "database/factories/"
+            "Polntantos\\AnnotationPlugin\\": "src/"
         }
     },
     "autoload-dev": {
@@ -59,10 +58,7 @@
         "laravel": {
             "providers": [
                 "Polntantos\\AnnotationPlugin\\AnnotationPluginServiceProvider"
-            ],
-            "aliases": {
-                "AnnotationPlugin": "Polntantos\\AnnotationPlugin\\Facades\\AnnotationPlugin"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",

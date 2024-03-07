@@ -38,6 +38,7 @@ class AnnotationPlugin extends Field
     public function setAnnotations(array|Closure $annotations): static
     {
         $this->annotations = $annotations;
+
         return $this;
     }
 
@@ -51,7 +52,7 @@ class AnnotationPlugin extends Field
         return $this->evaluate($this->annotations);
     }
 
-    public function setText(string | Closure $text): static
+    public function setText(string|Closure $text): static
     {
         $this->text = $text;
 
@@ -67,10 +68,11 @@ class AnnotationPlugin extends Field
     {
         $labelStrings = '';
         foreach ($this->getLabels() as $label) {
-            $labelStrings .= "<Label value=\"{$label}\" background=\"{$this->genColorCodeFromText($label)}\"/>" . PHP_EOL;
+            $labelStrings .= "<Label value=\"{$label}\" background=\"{$this->genColorCodeFromText($label)}\"/>".PHP_EOL;
         }
 
         $text = htmlspecialchars($this->getText());
+
         return "<View>
         <Labels name=\"label\" toName=\"text\">
         {$labelStrings}
@@ -98,8 +100,9 @@ class AnnotationPlugin extends Field
     {
         $user = new stdClass();
         $user->pk = 2;
-        $user->firstName = "pol";
-        $user->lastname = "ntantos";
+        $user->firstName = 'pol';
+        $user->lastname = 'ntantos';
+
         return json_encode($user);
     }
 
@@ -110,10 +113,10 @@ class AnnotationPlugin extends Field
         $task->annotations = [];
         $task->predictions = [
             [
-                "model_version" => "one",
-                "score" => 1,
-                "result" => $this->getAnnotations()
-            ]
+                'model_version' => 'one',
+                'score' => 1,
+                'result' => $this->getAnnotations(),
+            ],
         ];
         // $task->load = false;
         $task->id = 1;

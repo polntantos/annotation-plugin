@@ -19,7 +19,7 @@ $task = $getTask();
         task: {{$task}}
     })">
 
-        <div x-ref="labelstudio" class="w-full" style="min-height: 30vh; z-index: 1 !important;">
+        <div wire:ignore x-ref="labelstudio" class="w-full" style="min-height: 30vh; z-index: 1 !important;">
         </div>
 
     </div>

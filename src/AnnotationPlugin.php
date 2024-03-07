@@ -13,6 +13,10 @@ class AnnotationPlugin extends Field
 
     protected array|Closure $labels = [];
 
+    protected array|Closure $annotations = [];
+
+    protected array|Closure $predictions = [];
+
     protected string|Closure $text = '';
 
     public function setLabels(array|Closure $labels): static
@@ -30,9 +34,20 @@ class AnnotationPlugin extends Field
         return $this;
     }
 
+    public function setAnnotations(array|Closure $annotations): static
+    {
+        $this->annotations = $annotations;
+        return $this;
+    }
+
     public function getLabels(): ?array
     {
         return $this->evaluate($this->labels);
+    }
+
+    public function getAnnotations(): ?array
+    {
+        return $this->evaluate($this->annotations);
     }
 
     public function setText(string | Closure $text): static
@@ -50,13 +65,15 @@ class AnnotationPlugin extends Field
     {
         $labelStrings = "";
         foreach ($this->getLabels() as $label) {
-            $labelStrings .= "<Label value=\"{$label}\" background=\"{$this->genColorCodeFromText($label)}\"/>";
+            $labelStrings .= "<Label value=\"{$label}\" background=\"{$this->genColorCodeFromText($label)}\"/>" . PHP_EOL;
         }
+
+        $text = htmlspecialchars($this->getText());
         return "<View>
         <Labels name=\"label\" toName=\"text\">
         {$labelStrings}
         </Labels>
-        <Text name=\"text\" value=\"{$this->getText()}\"/>
+        <Text name=\"text\" value=\"{$text}\"/>
         </View>";
     }
 
@@ -78,17 +95,24 @@ class AnnotationPlugin extends Field
     function getUser()
     {
         $user = new stdClass();
-        $user->pk = 1;
-        $user->firstName = "James";
-        $user->lastname = "Dean";
+        $user->pk = 2;
+        $user->firstName = "pol";
+        $user->lastname = "ntantos";
         return json_encode($user);
     }
 
     function getTask()
     {
         $task = new stdClass();
+        // dd($this->getAnnotations());
         $task->annotations = [];
-        $task->predictions = [];
+        $task->predictions = [
+            [
+                "model_version" => "one",
+                "score" => 1,
+                "result" => $this->getAnnotations()
+            ]
+        ];
         // $task->load = false;
         $task->id = 1;
         $task->data = [
